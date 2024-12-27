@@ -35,4 +35,5 @@ export const RepositoryDeletedEventSchema = cdEventContextSchema.extend({
 // Export the types
 
 export type RepositoryCreatedEvent = z.infer<typeof RepositoryCreatedEventSchema>;
-export type RepositoryModifiedEvent = z.infer<typeof RepositoryModifiedSchema>;
+export type RepositoryModifiedEvent = z.infer<typeof RepositoryModifiedEventSchema>;
+export type RepositoryDeletedEvent = z.infer<typeof RepositoryDeletedEventSchema>;
