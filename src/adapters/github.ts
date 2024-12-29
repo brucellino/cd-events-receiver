@@ -1,9 +1,7 @@
 // routing for Github events
 import { Hono } from 'hono';
 import { verify } from '@octokit/webhooks-methods'
-import '../dev/cdevents/transformToCdEvents'
 import { handleGithubWebhook } from '../dev/cdevents/transformToCdEvents';
-import { cdEvent } from '../dev/cdevents/schemas';
 type Bindings = {
     GITHUB_WEBHOOK_SECRET: string
 }
