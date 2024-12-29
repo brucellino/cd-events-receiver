@@ -1,12 +1,14 @@
 import { Hono } from 'hono'
 import { decode, sign, verify } from 'hono/jwt'
 import { decodeBase64 } from 'hono/utils/encode'
+import githubWebhook from './adapters/github'
 
 type Bindings = {
   KV: KVNamespace
   GITHUB_CLIENT_ID: string
   GITHUB_CLIENT_SECRET: string
   GITHUB_CALLBACK_URL: string
+  GITHUB_WEBHOOK_SECRET: string // 
 }
 
 const app = new Hono<{ Bindings: CloudflareBindings }>()
@@ -14,11 +16,6 @@ const app = new Hono<{ Bindings: CloudflareBindings }>()
 app.get('/', (c) => {
   return c.html('<html><head><link rel = "stylesheet" href = "https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"></head><body><header class="container-fluid"><h3>CD Events Receiver</h3></header></body></html>')
 })
-
-app.notFound((c) => {
-  return c.text('Sorry, can\'t find that mate', 404)
-})
-
 
 // /login is the path which redirects to the github auth login
 app.get('/login', (c) => {
@@ -83,6 +80,12 @@ app.get('/protected', async (c) => {
     return c.text('Invalid token', 401);
   }
 });
+
+app.route('/github-webhook', githubWebhook)
+
+app.notFound((c) => {
+  return c.text('Sorry, can\'t find that mate', 404)
+})
 
 
 export default app;
