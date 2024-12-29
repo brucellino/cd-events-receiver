@@ -19,7 +19,7 @@ export const RepositorySubjectSchema = cdEventSubjectSchema.extend({
 // Repository Events
 export const RepositoryCreatedEventSchema = cdEventContextSchema.extend({
     type: z.literal("dev.cdevents.repository.created"),
-    subject: RepositorySubjectContentSchema
+    subject: RepositorySubjectContentSchema,
 });
 
 export const RepositoryModifiedEventSchema = cdEventContextSchema.extend({

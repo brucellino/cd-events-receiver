@@ -33,7 +33,7 @@ describe("VocabularySchema", () => {
 
     it("validates all valid types with valid semver", () => {
         const validSemver = "1.0.0";
-        const validTypes = ValidTypes.map((baseType) => `dev.cdevents.${baseType}.${validSemver}`);
+    const validTypes = ValidTypes.map((baseType) => `dev.cdevents.${baseType}.${validSemver}`);
         for (const validType of validTypes) {
             expect(VocabularySchema.safeParse(validType).success).toBe(true);
         }

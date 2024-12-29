@@ -21,6 +21,23 @@ const vocabulary = {
         branch: ["created", "deleted"],
         change: ["created", "reviewed", "merged", "abandoned", "updated"]
     },
+    ci: {
+        build: ["queued", "started", "finished"],
+        artifact: ["packaged", "signed", "published", "downloaded", "deleted"]
+    },
+    cd: {
+        environment: ["created", "modified", "deleted"],
+        service: ["deployed", "upgraded", "rolledback", "removed", "published"]
+    },
+    ops: {
+        incident: ["detected", "reported", "resolved"],
+        ticket: ["created", "updated", "closed"]
+    },
+    test: {
+        testCaseRun: ["queued", "started", "finished", "skipped"],
+        testSuiteRun: ["queued", "started", "finished"],
+        testOutput: ["published"]
+    }
 };
 
 // Generate the valid types based on the vocabulary
