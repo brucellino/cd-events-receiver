@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 import { cdEventContextSchema, cdEventSubjectSchema } from './schemas'
-import { cdEventContext } from './scm';
 
 
 // repository subject content schema

@@ -1,8 +1,9 @@
+// routing for Github events
 import { Hono } from 'hono';
 import { verify } from '@octokit/webhooks-methods'
-import { cdEventBase } from '../dev/cdevents/scm'
 import '../dev/cdevents/transformToCdEvents'
 import { handleGithubWebhook } from '../dev/cdevents/transformToCdEvents';
+import { cdEvent } from '../dev/cdevents/schemas';
 type Bindings = {
     GITHUB_WEBHOOK_SECRET: string
 }
@@ -27,10 +28,16 @@ githubWebhook.post('/', async (c) => {
     const payload = JSON.parse(body);
     // Transform and handle the event
     // First we need to implement the cdEvent Type
-    const cdEvent = handleGithubWebhook(event, eventId, payload); // -> should return a cd event with context
-    console.log(cdEvent);
-    if (!cdEvent) return c.text('Unsupported Event', 422);
-    return c.json(cdEvent, 201);
+    let e = null;
+    try {
+        e = await handleGithubWebhook(event, eventId, payload); // -> should return a cd event with context and subject
+        console.log(e)
+    } catch (error) {
+        return c.text('Unsupported Event', 422);
+    }
+    console.log(e);    
+    // put on the queue
+    return c.json("OK", 201);
 })
 
 export default githubWebhook

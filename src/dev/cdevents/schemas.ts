@@ -78,10 +78,10 @@ export const cdEventContextSchema = z.object({
   id: z.string().uuid(), //
   type: VocabularySchema,
   source: z.string().url(),
-  version: z.string().regex(/^\d+\.\d+\.\d+$/), // semver format
   timestamp: z.string().datetime({ offset: true }), // ISO 8601 with timezone
-  chainId: z.string().uuid(),
-  schemaUri: z.string().url(),
+  version: z.string().regex(/^\d+\.\d+\.\d+$/), // semver format
+  chainId: z.string().uuid().optional(),
+  schemaUri: z.string().url().optional(),
   links: z.array(cdEventLinkSchema).optional(),
 });
 
@@ -91,3 +91,12 @@ export const cdEventSubjectSchema = z.object({
   source: z.string().optional(),
   type: z.string().optional(),
 });
+
+export const cdEvent = z.object({
+    subject: cdEventSubjectSchema,
+    context: cdEventContextSchema
+})
+
+export type cdEventSubject = z.infer<typeof cdEventSubjectSchema>;
+export type cdEventContext = z.infer<typeof cdEventContextSchema>;
+export type cdEvent = z.infer<typeof cdEvent>;
