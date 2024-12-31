@@ -6,7 +6,6 @@
 import { z } from "zod";
 import { purlSchema, urlSchema } from "./types";
 import { VocabularySchema } from "./schemas";
-Art;
 
 /* 
     Subject Types
@@ -92,3 +91,15 @@ const ServicePublishedEventSchema = z.object({
   source: urlSchema.optional(),
   environment: Environment,
 });
+
+/* 
+    Deployment Event Types
+*/
+export type EnvironmentCreated = z.infer<typeof EnvironmentCreatedEventSchema>;
+export type EnvironmentModified = z.infer<typeof EnvironmentModifiedEventSchema>;
+export type EnvironmentDeleted = z.infer<typeof EnvironmentDeletedEventSchema>;
+export type ServiceDeployed = z.infer<typeof ServiceDeployedEventSchema>;
+export type ServiceUpgraded = z.infer<typeof ServiceUpgradedEventSchema>;
+export type ServiceRolledBack = z.infer<typeof ServiceRolledBackEventSchema>;
+export type ServicePublished = z.infer<typeof ServicePublishedEventSchema>;
+export type ServiceRemoved = z.infer<typeof ServiceRemovedEventSchema>;
