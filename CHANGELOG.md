@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/brucellino/cd-events-receiver/compare/v1.0.0...v1.1.0) (2024-12-31)
+
+
+### Features
+
+* **types:** add  types ([#6](https://github.com/brucellino/cd-events-receiver/issues/6)) ([b941464](https://github.com/brucellino/cd-events-receiver/commit/b94146405d4336ad5ba760370c04ea80a4f821a8))
+
 # 1.0.0 (2024-12-30)
 
 
