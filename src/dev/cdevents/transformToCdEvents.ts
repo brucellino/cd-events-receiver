@@ -57,4 +57,6 @@ export async function handleGithubWebhook(
   }
 }
 
-async function publishCdEvent(event: string, eventId: string, payload: object);
+async function publishCdEvent(event: string, eventId: string, payload: object) { 
+    return null;
+};
