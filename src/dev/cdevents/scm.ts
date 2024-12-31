@@ -25,12 +25,12 @@ const BranchSchema = z.object({
 })
 
 /* SCM Change */
-const ChangeSchema = z.object({
+export const ChangeSchema = z.object({
     id: z.string(),
     source: z.string(),
     type: z.literal("change"),
-    description: z.string(),
-    repository: RepositorySchema,
+    description: z.string().optional(),
+    repository: RepositorySchema.optional(),
 })
 
 /* SCM Events */
@@ -132,45 +132,3 @@ export type ChangeReviewed = z.infer<typeof ChangeReviewedEventSchema>;
 export type ChangeMerged = z.infer<typeof ChangeMergedEventSchema>;
 export type ChangeAbandoned = z.infer<typeof ChangeAbandonedEventSchema>;
 export type ChangeUpdated = z.infer<typeof ChangeUpdatedEventSchema>;
-
-// base schema for all CD Events
-export const cdEventsVersion = z.literal('0.2.0')
-
-export const cdEventBaseSchema = z.object({
-    type: z.string(),
-    source: z.string().url(),
-    subject: z.string(),
-    data: z.object({
-        id: z.string(),
-    }).optional(),
-    timestamp: z.string().datetime()
-});
-
-export const cdEventSubjectSchema = z.object({
-    id: z.string(),
-    source: z.string(),
-    type: z.string(),
-    content: z.unknown().optional()
-});
-
-export const cdEventLinkSchema = z.object({
-    linkType: z.string().optional(),
-    linkKind: z.string().optional(),
-    target: z.object({
-        contextId: z.string().uuid().optional()
-    }),
-    tags: z.unknown().optional()
-});
-
-export const cdEventContextSchema = z.object({
-    version: z.string().regex(/^\d+\.\d+\.\d+$/), // semver format
-    id: z.string().uuid(),
-    chainId: z.string().uuid(),
-    type: z.string(),
-    timestamp: z.string().datetime({ offset: true }), // ISO 8601 with timezone
-    schemaUri: z.string().url(),
-    links: z.array(cdEventLinkSchema).optional()
-});
-
-export const cdEventSubject = z.infer<typeof cdEventSubjectSchema>;
-export const cdEventContext = z.infer<typeof cdEventContextSchema>;

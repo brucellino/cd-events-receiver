@@ -19,7 +19,7 @@ const qualifierSchema = z.record(z.string().regex(componentPattern, { message: "
 const subpathSchema = z.string().regex(componentPattern, { message: "Invalid subpath format" }).optional();
 
 // create purl schema
-const purlSchema = z.object({
+export const purlSchema = z.object({
     type: typeSchema,
     namespace: namespaceSchema,
     name: nameSchema,
@@ -29,6 +29,11 @@ const purlSchema = z.object({
 
 })
 
+export const sbomSchema = z.object({
+    uri: z.string()
+})
+
 // Exported types
 // purl
 export type PURL = z.infer<typeof purlSchema>;
+export type SBOM = z.infer<typeof sbomSchema>;
