@@ -99,6 +99,7 @@ export type BuildQueued = z.infer<typeof BuildQueuedEventSchema>;
 export type BuildStarted = z.infer<typeof BuildStartedEventSchema>;
 export type BuildFinished = z.infer<typeof BuildFinishedEventSchema>;
 export type ArtifactPackaged = z.infer<typeof ArtifactPackagedEventSchema>;
+export type ArtifactSigned = z.infer<typeof ArtifactSignedEventSchema>;
 export type ArtifactPublished = z.infer<typeof ArtifactPackagedEventSchema>;
 export type ArtifactDownloaded = z.infer<typeof ArtifactDownloadedEventSchema>;
 export type ArtifactDeleted = z.infer<typeof ArtifactDownloadedEventSchema>;
