@@ -43,8 +43,25 @@ const RepositoryCreatedEventSchema = z.object({
     url: urlSchema,
     viewUrl: z.string().url().optional()
 })
-// const RepositoryModifiedEventSchema // <- in repository-events.ts
-// const RepositoryDeletedEventSchema // <- in repository-events.ts
+const RepositoryModifiedEventSchema = z.object({
+    id: z.string(),
+    source: z.string().optional(),
+    type: VocabularySchema.optional(),
+    name: z.string(),
+    owner: z.string().optional(),
+    url: urlSchema,
+    viewUrl: z.string().url().optional()
+})
+
+const RepositoryDeletedEventSchema = z.object({
+    id: z.string(),
+    source: z.string().optional(),
+    type: VocabularySchema.optional(),
+    name: z.string().optional(),
+    owner: z.string().optional(),
+    url: urlSchema.optional(),
+    viewUrl: z.string().url()
+})
 
 // Branch Events
 const BranchCreatedEventSchema = z.object({
@@ -105,6 +122,9 @@ export type Branch = z.infer<typeof BranchSchema>;
 export type Change = z.infer<typeof ChangeSchema>;
 
 /* SCM Event Types */
+export type RepositoryCreated = z.infer<typeof RepositoryCreatedEventSchema>;
+export type RepositoryModified = z.infer<typeof RepositoryModifiedEventSchema>;
+export type RepositoryDeleted = z.infer<typeof RepositoryDeletedEventSchema>;
 export type BranchCreated = z.infer<typeof BranchCreatedEventSchema>;
 export type BranchDeleted = z.infer<typeof BranchDeletedEventSchema>;
 export type ChangeCreated = z.infer<typeof ChangeCreatedEventSchema>;
@@ -124,14 +144,15 @@ export const cdEventBaseSchema = z.object({
         id: z.string(),
     }).optional(),
     timestamp: z.string().datetime()
-})
+});
 
 export const cdEventSubjectSchema = z.object({
     id: z.string(),
     source: z.string(),
     type: z.string(),
     content: z.unknown().optional()
-})
+});
+
 export const cdEventLinkSchema = z.object({
     linkType: z.string().optional(),
     linkKind: z.string().optional(),
@@ -139,7 +160,7 @@ export const cdEventLinkSchema = z.object({
         contextId: z.string().uuid().optional()
     }),
     tags: z.unknown().optional()
-})
+});
 
 export const cdEventContextSchema = z.object({
     version: z.string().regex(/^\d+\.\d+\.\d+$/), // semver format
@@ -149,19 +170,7 @@ export const cdEventContextSchema = z.object({
     timestamp: z.string().datetime({ offset: true }), // ISO 8601 with timezone
     schemaUri: z.string().url(),
     links: z.array(cdEventLinkSchema).optional()
-})
-
-// // Repository events
-// export const RepositoryCreatedEventSchema = z.object({
-//     context: cdEventContextSchema,
-//     subject: cdEventSubjectSchema
-// });
+});
 
 export const cdEventSubject = z.infer<typeof cdEventSubjectSchema>;
 export const cdEventContext = z.infer<typeof cdEventContextSchema>;
-
-export const RepositoryCreatedEvent = z.infer<typeof RepositoryCreatedEventSchema>;
-
-// branch events
-
-// change events
