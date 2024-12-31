@@ -1,6 +1,8 @@
 {
   "name": "cd-events-receiver",
   "scripts": {
+    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint:fix": "eslint 'src/**/*.{ts.tsx}' --fix",
     "test": "jest",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
@@ -34,7 +36,7 @@
     "jest": "^29.7.0",
     "semantic-release": "^24.2.0",
     "ts-jest": "^29.2.5",
-    "typescript-eslint": "^8.18.2",
+    "typescript-eslint": "^8.19.0",
     "wrangler": "^3.96.0"
   }
 }

@@ -97,6 +97,7 @@ export const cdEvent = z.object({
     context: cdEventContextSchema
 })
 
+// export type Vocabulary = z.infer<typeof VocabularySchema>;
 export type cdEventSubject = z.infer<typeof cdEventSubjectSchema>;
 export type cdEventContext = z.infer<typeof cdEventContextSchema>;
 export type cdEvent = z.infer<typeof cdEvent>;
