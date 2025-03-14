@@ -37,6 +37,6 @@
     "semantic-release": "^24.2.0",
     "ts-jest": "^29.2.5",
     "typescript-eslint": "^8.19.0",
-    "wrangler": "^3.96.0"
+    "wrangler": "^4.0.0"
   }
 }
