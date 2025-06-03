@@ -20,7 +20,7 @@
     ]
   },
   "dependencies": {
-    "@octokit/webhooks-methods": "^5.1.0",
+    "@octokit/webhooks-methods": "^6.0.0",
     "hono": "^4.6.14"
   },
   "devDependencies": {
